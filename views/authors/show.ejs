@@ -17,18 +17,18 @@
 					</li>
 				</ul>
 			</nav>
-			<main>
-				<section>
-					<h2>Author Attributes:</h2>
-					<ul>
-						<li>Name: <%=author.name%></li>
-					</ul>
-					<a href="/authors/<%=author._id%>/edit">Edit</a>
-					<form action="/authors/<%=author._id%>?_method=DELETE" method="post">
-						<input type="submit" value="Delete Author"/>
-					</form>
-				</section>
-			</main>
 		</header>
+		<main>
+			<section>
+				<h2>Author Attributes:</h2>
+				<ul>
+					<li>Name: <%=author.name%></li>
+				</ul>
+				<a href="/authors/<%=author._id%>/edit">Edit</a>
+				<form action="/authors/<%=author._id%>?_method=DELETE" method="post">
+					<input type="submit" value="Delete Author"/>
+				</form>
+			</section>
+		</main>
 	</body>
 </html>
