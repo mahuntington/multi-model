@@ -20,6 +20,9 @@
 		</header>
 		<main>
 			<%=article.body%>
+			<form action="/articles/<%=article._id%>?_method=DELETE" method="post">
+				<input type="submit" value="Delete Article"/>
+			</form>
 		</main>
 	</body>
 </html>
