@@ -34,4 +34,19 @@ router.delete('/:id', function(req, res){
 	});
 });
 
+router.get('/:id/edit', function(req, res){
+	Article.findById(req.params.id, function(err, foundArticle){
+		res.render('articles/edit.ejs', {
+			article: foundArticle
+		});
+	});
+});
+
+router.put('/:id', function(req, res){
+	Article.findByIdAndUpdate(req.params.id, req.body, function(){
+		res.redirect('/articles');
+	});
+});
+
+
 module.exports = router;
