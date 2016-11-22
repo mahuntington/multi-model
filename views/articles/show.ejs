@@ -6,17 +6,20 @@
 	</head>
 	<body>
 		<header>
-			<h1>Welcome to the Blog</h1>
+			<h1><%=article.title%></h1>
 			<nav>
 				<ul>
 					<li>
-						<a href="/authors">Authors</a>
+						<a href="/">Home</a>
 					</li>
 					<li>
-						<a href="/articles">Articles</a>
+						<a href="/articles">Articles Index</a>
 					</li>
 				</ul>
 			</nav>
 		</header>
+		<main>
+			<%=article.body%>
+		</main>
 	</body>
 </html>

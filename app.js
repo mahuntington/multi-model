@@ -10,6 +10,9 @@ app.use(bodyParser.urlencoded({extended:false}));
 var authorsController = require('./controllers/authors.js');
 app.use('/authors', authorsController);
 
+var articlesController = require('./controllers/articles.js');
+app.use('/articles', articlesController);
+
 app.get('/', function(req, res){
 	res.render('index.ejs');
 });
