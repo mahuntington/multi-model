@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<header>
+			<h1>Edit <%=author.name%>'s Info</h1>
+			<nav>
+				<ul>
+					<li>
+						<a href="/">Home</a>
+					</li>
+					<li>
+						<a href="/authors">Create a new Author</a>
+					</li>
+				</ul>
+			</nav>
+			<main>
+				<h2>Author Attributes:</h2>
+				<form action="/authors/<%=author._id%>?_method=PUT" method="post">
+					<input type="text" name="name" value="<%=author.name%>"/>
+					<input type="submit" value="Update Author"/>
+				</form>
+			</main>
+		</header>
+	</body>
+</html>
