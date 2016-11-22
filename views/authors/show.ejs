@@ -24,7 +24,11 @@
 				<ul>
 					<li>Name: <%=author.name%></li>
 				</ul>
+			</section>
+			<section>
 				<a href="/authors/<%=author._id%>/edit">Edit</a>
+			</section>
+			<section>
 				<form action="/authors/<%=author._id%>?_method=DELETE" method="post">
 					<input type="submit" value="Delete Author"/>
 				</form>
