@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Article = require('../models/articles.js');
+var Author = require('../models/authors.js');
 
 router.get('/', function(req, res){
 	Article.find({}, function(err, foundArticles){
@@ -29,8 +30,14 @@ router.get('/:id', function(req,res){
 });
 
 router.delete('/:id', function(req, res){
-	Article.findByIdAndRemove(req.params.id, function(){
-		res.redirect('/articles');
+	Author.find({'articles._id':req.params.id}, function(err, foundAuthors){
+		for(var i = 0; i < foundAuthors.length; i++){
+			foundAuthors[i].articles.id(req.params.id).remove();
+			foundAuthors[i].save();
+		}
+		Article.findByIdAndRemove(req.params.id, function(){
+			res.redirect('/articles');
+		})
 	});
 });
 
