@@ -30,7 +30,12 @@
 				<h2>Articles Written By This Author</h2>
 				<ul>
 					<% for(var i = 0; i < author.articles.length; i++) { %>
-						<li><%=author.articles[i].title%></li>
+						<li>
+							<%=author.articles[i].title%>
+							<form action="/authors/<%=author._id%>/articles/<%=author.articles[i]._id%>?_method=DELETE" method="post">
+								<input type="submit" value="Remove This Author's Attribution from This Article" />
+							</form>
+						</li>
 					<% } %>
 				</ul>
 			</section>

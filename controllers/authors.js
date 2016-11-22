@@ -63,4 +63,13 @@ router.post('/:id/articles', function(req, res){
 	});
 });
 
+router.delete('/:authorId/articles/:articleId', function(req, res){
+	Author.findById(req.params.authorId, function(err, foundAuthor){
+		foundAuthor.articles.id(req.params.articleId).remove();
+		foundAuthor.save(function(){
+			res.redirect('/authors/' + req.params.authorId + '/edit');
+		})
+	});
+});
+
 module.exports = router;
