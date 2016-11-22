@@ -1,5 +1,6 @@
 var express = require('express');
 var Author = require('../models/authors.js');
+var Article = require('../models/articles.js');
 var router = express.Router();
 
 router.get('/', function(req, res){
@@ -41,9 +42,23 @@ router.put('/:id', function(req, res){
 });
 
 router.get('/:id/edit', function(req, res){
-	Author.findById(req.params.id, function(err, foundAuthor){
-		res.render('authors/edit.ejs', {
-			author: foundAuthor
+	Article.find({}, function(err, foundArticles){
+		Author.findById(req.params.id, function(err, foundAuthor){
+			res.render('authors/edit.ejs', {
+				author: foundAuthor,
+				articles: foundArticles
+			});
+		});
+	});
+});
+
+router.post('/:id/articles', function(req, res){
+	Article.findById(req.body.articleId, function(err, foundArticle){
+		Author.findById(req.params.id, function(err, foundAuthor){
+			foundAuthor.articles.push(foundArticle);
+			foundAuthor.save(function(){
+				res.redirect('/authors/' + req.params.id + '/edit');
+			})
 		});
 	});
 });

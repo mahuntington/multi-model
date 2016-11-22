@@ -13,17 +13,41 @@
 						<a href="/">Home</a>
 					</li>
 					<li>
-						<a href="/authors">Authors Index</a>
+						<a href="/authors/<%=author._id%>"><%=author.name%>'s Show Page</a>
 					</li>
 				</ul>
 			</nav>
 		</header>
 		<main>
-			<h2>Author Attributes:</h2>
-			<form action="/authors/<%=author._id%>?_method=PUT" method="post">
-				<input type="text" name="name" value="<%=author.name%>"/><br/>
-				<input type="submit" value="Update Author"/>
-			</form>
+			<section>
+				<h2>Author Attributes:</h2>
+				<form action="/authors/<%=author._id%>?_method=PUT" method="post">
+					<input type="text" name="name" value="<%=author.name%>"/><br/>
+					<input type="submit" value="Update Author"/>
+				</form>
+			</section>
+			<section>
+				<h2>Articles Written By This Author</h2>
+				<ul>
+					<% for(var i = 0; i < author.articles.length; i++) { %>
+						<li><%=author.articles[i].title%></li>
+					<% } %>
+				</ul>
+			</section>
+			<section>
+				<h2>Articles Not Written By This Author</h2>
+				<ul>
+					<% for(var i = 0; i < articles.length; i++) { %>
+						<li>
+							<%=articles[i].title%>
+							<form action="/authors/<%=author._id%>/articles" method="post">
+								<input type="hidden" name="articleId" value="<%=articles[i]._id%>">
+								<input type="submit" value="Attribute Article To This Author" />
+							</form>
+						</li>
+					<% } %>
+				</ul>
+			</section>
 		</main>
 	</body>
 </html>

@@ -26,6 +26,14 @@
 				</ul>
 			</section>
 			<section>
+				<h2>Articles Written By This Author</h2>
+				<ul>
+					<% for(var i = 0; i < author.articles.length; i++) { %>
+						<li><%=author.articles[i].title%></li>
+					<% } %>
+				</ul>
+			</section>
+			<section>
 				<a href="/authors/<%=author._id%>/edit">Edit</a>
 			</section>
 			<section>
