@@ -50,8 +50,15 @@ router.get('/:id/edit', function(req, res){
 });
 
 router.put('/:id', function(req, res){
-	Article.findByIdAndUpdate(req.params.id, req.body, function(){
-		res.redirect('/articles');
+	Article.findByIdAndUpdate(req.params.id, req.body, {new:true}, function(err, updatedArticle){
+		Author.find({'articles._id':req.params.id}, function(err, foundAuthors){
+			for(var i = 0; i < foundAuthors.length; i++){
+				foundAuthors[i].articles.id(req.params.id).remove();
+				foundAuthors[i].articles.push(updatedArticle);
+				foundAuthors[i].save();
+			}
+			res.redirect('/articles');
+		});
 	});
 });
 
