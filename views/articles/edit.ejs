@@ -27,8 +27,16 @@
 				</textarea><br/>
 				Choose and author:
 				<select name="authorId">
-					<% for(var i = 0; i < authors.length; i++) { %>
-						<option value="<%=authors[i]._id %>"><%=authors[i].name %></option>
+					<% for(var currentAuthorIndex = 0; currentAuthorIndex < authors.length; currentAuthorIndex++) { %>
+						<%
+							var isAuthor = false;
+							for(var currentArticleIndex = 0; currentArticleIndex < authors[currentAuthorIndex].articles.length; currentArticleIndex++){
+								if(authors[currentAuthorIndex].articles[currentArticleIndex]._id.toString() == article._id.toString()){
+									isAuthor = true;
+								}
+							}
+						%>
+						<option value="<%=authors[currentAuthorIndex]._id %>" <%=(isAuthor)?'selected':''%>><%=authors[currentAuthorIndex].name %></option>
 					<% } %>
 				</select><br/>
 				<input type="submit" value="Update Article"/>
