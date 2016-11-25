@@ -1,7 +1,9 @@
 var mongoose = require('mongoose');
+var Article = require('./articles.js');
 
 var authorSchema = mongoose.Schema({
-	name: String
+	name: String,
+	articles: [Article.schema]
 });
 
 var author = mongoose.model('Author', authorSchema);

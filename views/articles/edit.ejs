@@ -25,6 +25,12 @@
 				<textarea name="body">
 					<%=article.body%>
 				</textarea><br/>
+				Choose and author:
+				<select name="authorId">
+					<% for(var i = 0; i < authors.length; i++) { %>
+						<option value="<%=authors[i]._id %>"><%=authors[i].name %></option>
+					<% } %>
+				</select><br/>
 				<input type="submit" value="Update Article"/>
 			</form>
 		</main>
