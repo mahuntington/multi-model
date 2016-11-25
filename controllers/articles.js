@@ -42,6 +42,10 @@ router.get('/:id', function(req,res){
 });
 
 router.delete('/:id', function(req, res){
+	Author.findOne({'articles._id':req.params.id}, function(err, author){
+		author.articles.id(req.params.id).remove();
+		author.save();
+	});
 	Article.findByIdAndRemove(req.params.id, function(){
 		res.redirect('/articles');
 	});
