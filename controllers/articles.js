@@ -32,8 +32,11 @@ router.post('/', function(req, res){
 
 router.get('/:id', function(req,res){
 	Article.findById(req.params.id, function(err, foundArticle){
-		res.render('articles/show.ejs', {
-			article: foundArticle
+		Author.findOne({'articles._id':req.params.id}, function(err, foundAuthor){
+			res.render('articles/show.ejs', {
+				author: foundAuthor,
+				article: foundArticle
+			});
 		});
 	});
 });
