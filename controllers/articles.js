@@ -65,13 +65,14 @@ router.get('/:id/edit', function(req, res){
 router.put('/:id', function(req, res){
 	Author.findOne({'articles._id':req.params.id}, function(err, previousAuthor){
 		previousAuthor.articles.id(req.params.id).remove();
-		previousAuthor.save();
-	});
-	Author.findById(req.body.authorId, function(err, foundAuthor){
-		Article.findByIdAndUpdate(req.params.id, req.body, {new:true}, function(err, updatedArticle){
-			foundAuthor.articles.push(updatedArticle);
-			foundAuthor.save(function(){
-				res.redirect('/articles');
+		previousAuthor.save(function(){
+			Author.findById(req.body.authorId, function(err, newAuthor){
+				Article.findByIdAndUpdate(req.params.id, req.body, {new:true}, function(err, updatedArticle){
+					newAuthor.articles.push(updatedArticle);
+					newAuthor.save(function(){
+						res.redirect('/articles');
+					});
+				});
 			});
 		});
 	});
