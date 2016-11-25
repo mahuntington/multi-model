@@ -12,13 +12,22 @@ router.get('/', function(req, res){
 });
 
 router.get('/new', function(req, res){
-	res.render('articles/new.ejs');
+	Author.find({}, function(err, allAuthors){
+		res.render('articles/new.ejs', {
+			authors:allAuthors
+		});
+	});
 });
 
 router.post('/', function(req, res){
-	Article.create(req.body, function(err, createdArticle){
-		res.redirect('/articles');
-	})
+	Author.findById(req.body.authorId, function(err, foundAuthor){
+		Article.create(req.body, function(err, createdArticle){
+			foundAuthor.articles.push(createdArticle);
+			foundAuthor.save(function(){
+				res.redirect('/articles');
+			})
+		});
+	});
 });
 
 router.get('/:id', function(req,res){
